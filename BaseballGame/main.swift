@@ -75,7 +75,7 @@ class InputHandler {
             throw InputError.notANumber
         }
 
-        guard let number = Int(input), 100...999 ~= number else {
+      guard let number = Int(input), 100...999 ~= number else {
             throw InputError.numLimit
         }
 
@@ -162,15 +162,14 @@ class BaseballGame {
                 let userInput = try inputHandler.getInput()
                 let userGuess = userInput.compactMap { Int(String($0)) }
 
-                
+                tryCount += 1
 
                 let (strike, ball) = hintCalculator.calculateHints(answer: answer, userGuess: userGuess)
                 print("\(strike) 스트라이크, \(ball) 볼")
-
+                gameRecords.append(tryCount) //  기록 저장2
                 if strike == 3 {
                     print("!!!!!!홈런!!!!!!!")
-                    tryCount += 1
-                    gameRecords.append(tryCount) //  기록 저장
+                    
                     break
                 } else {
                     print("아쉽지만 다시")
